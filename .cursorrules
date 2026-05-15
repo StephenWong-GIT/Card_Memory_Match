@@ -1,0 +1,47 @@
+This is a Godot 4.6 project using GDScript (not C#).
+
+Project context:
+- This is a learning project — a simple memory match 
+  card game (4x4 grid, flip pairs, match to win)
+- I am a developer (PHP, JavaScript, React background) 
+  new to Godot specifically
+- Target platform: Windows desktop
+
+Conventions:
+- snake_case for variables, functions, and file names
+- PascalCase for node names, classes, and scene files
+- Use signals for cross-node communication, not direct 
+  references where avoidable
+- Prefer composition over deep inheritance
+- Project structure:
+  - /scenes for .tscn files
+  - /scripts for .gd files  
+  - /assets for any sprites, sounds, fonts (none needed 
+    for this project — use ColorRect or simple shapes)
+
+When editing:
+- Don't refactor unrelated code
+- Don't add features I didn't ask for
+- If a node path or signal is unclear, ask before guessing
+- Match the existing code style in the file you're editing
+- Make minimal changes — surgical fixes, not rewrites
+
+Teaching mode:
+- I know how to code; I don't know Godot's specifics yet
+- When you introduce a Godot concept for the first time 
+  (signals, autoloads, tweens, @export, @onready, scene 
+  instancing, etc.), briefly explain what it does and 
+  when it's used — 2-3 sentences max, not a lecture
+- When you tell me to do something in the Godot editor 
+  (create a node, set a property), be specific: which 
+  panel, what to click, what to name it
+- Explain GDScript-specific syntax that differs from 
+  Python/JavaScript when it first appears
+
+Scope discipline:
+- This is a learning project — keep code clear over 
+  clever
+- No optimization passes unless I ask
+- No "production-ready" patterns (object pools, state 
+  machines) unless the feature genuinely needs them
+- Comments should explain *why*, not *what*
