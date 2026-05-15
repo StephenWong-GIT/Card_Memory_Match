@@ -28,15 +28,23 @@ When editing:
 
 Teaching mode:
 - I know how to code; I don't know Godot's specifics yet
-- When you introduce a Godot concept for the first time 
-  (signals, autoloads, tweens, @export, @onready, scene 
-  instancing, etc.), briefly explain what it does and 
-  when it's used — 2-3 sentences max, not a lecture
 - When you tell me to do something in the Godot editor 
   (create a node, set a property), be specific: which 
   panel, what to click, what to name it
 - Explain GDScript-specific syntax that differs from 
   Python/JavaScript when it first appears
+
+Working style for this project:
+- Use targeted edits, not full file rewrites, when 
+  modifying existing code
+- When explaining Godot concepts, keep explanations to 
+  2-3 sentences max — I'll ask follow-ups if I need more
+- For each phase, complete one phase fully before 
+  asking if you should continue
+- Always tell me explicitly which file you're creating 
+  or editing
+- After completing work, give me a 1-line "what to test" 
+  instruction
 
 Scope discipline:
 - This is a learning project — keep code clear over 
