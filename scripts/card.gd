@@ -15,8 +15,24 @@ var pair_id: int = -1
 var _state: State = State.FACE_DOWN
 
 const COLOR_FACE_DOWN := Color(0.15, 0.18, 0.35)
-const COLOR_FACE_UP := Color(0.35, 0.55, 0.85)
 const COLOR_MATCHED := Color(0.25, 0.65, 0.4)
+
+# One distinct color per pair so the player can see which cards go together.
+const PAIR_COLORS: Array = [
+	Color(0.85, 0.25, 0.25),  # 0 red
+	Color(0.90, 0.55, 0.15),  # 1 orange
+	Color(0.85, 0.80, 0.15),  # 2 yellow
+	Color(0.20, 0.75, 0.35),  # 3 green
+	Color(0.20, 0.65, 0.85),  # 4 cyan
+	Color(0.40, 0.30, 0.85),  # 5 purple
+	Color(0.85, 0.35, 0.75),  # 6 pink
+	Color(0.15, 0.55, 0.65),  # 7 teal
+]
+
+func _face_up_color() -> Color:
+	if pair_id >= 0 and pair_id < PAIR_COLORS.size():
+		return PAIR_COLORS[pair_id]
+	return Color(0.35, 0.55, 0.85)
 
 
 func _ready() -> void:
@@ -64,7 +80,7 @@ func _refresh_visual() -> void:
 		State.FACE_DOWN:
 			_face.color = COLOR_FACE_DOWN
 		State.FACE_UP:
-			_face.color = COLOR_FACE_UP
+			_face.color = _face_up_color()
 		State.MATCHED:
 			_face.color = COLOR_MATCHED
 
