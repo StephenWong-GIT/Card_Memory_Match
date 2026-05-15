@@ -20,8 +20,10 @@ const COLOR_MATCHED := Color(0.25, 0.65, 0.4)
 
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_STOP
+	_face.mouse_filter = MOUSE_FILTER_IGNORE
 	_refresh_visual()
-	if get_tree().current_scene == self:
+	var run_alone := get_parent() == get_tree().root or get_tree().current_scene == self
+	if run_alone:
 		card_clicked.connect(_demo_toggle_on_click)
 
 
