@@ -175,7 +175,7 @@ func _interaction_scale_vector() -> Vector2:
 func _apply_interaction_visual() -> void:
 	if _state == State.MATCHED:
 		return
-	if _interact_tween != null and _interact_tween.is_valid():
+	if _interact_tween != null:
 		_interact_tween.kill()
 	_interact_tween = create_tween()
 	_interact_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -208,14 +208,14 @@ func _start_flip_visual(to_face_up: bool) -> void:
 
 
 func _kill_flip_tween() -> void:
-	if _flip_tween != null and _flip_tween.is_valid():
+	if _flip_tween != null:
 		_flip_tween.kill()
 	_flip_tween = null
 	_face.scale.x = 1.0
 
 
 func _start_match_pulse() -> void:
-	if _pulse_tween != null and _pulse_tween.is_valid():
+	if _pulse_tween != null:
 		_pulse_tween.kill()
 	_pulse_tween = create_tween()
 	_pulse_tween.set_loops()
