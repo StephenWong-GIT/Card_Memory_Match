@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw1mx7cardfoun"]
+
+[ext_resource type="Script" path="res://scripts/card.gd" id="1_card"]
+
+[node name="Card" type="Control"]
+custom_minimum_size = Vector2(80, 120)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_card")
+
+[node name="Face" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 120.0
+color = Color(0.15, 0.18, 0.35, 1)
