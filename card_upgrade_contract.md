@@ -15,7 +15,8 @@ into a visually polished, satisfying-to-play experience
 through theming, animation, transitions, and micro-
 interactions. Execute autonomously with a strict 
 red-green-refactor TDD loop. Human intervention only 
-when escalation triggers fire.
+when escalation triggers fire OR when subjective 
+judgment is needed (deferred to queue, not blocking).
 
 ---
 
@@ -186,8 +187,11 @@ Each task is its own red-green-refactor cycle.
 
 ### Tier 5: Final pass
 14. Ensure consistent animation timing/easing across game
-15. Add subtle ambient motion (e.g., gentle background 
-    color shift, or breathing effect on idle UI)
+15. Add subtle ambient motion (gentle background color 
+    shift, or breathing effect on idle UI)
+16. Win screen prominently displays final move count with 
+    a "PERSONAL BEST!" label slot (always shown for now, 
+    will be conditional once leaderboard exists)
 
 If time/iterations remain after Tier 5, STOP. Do not 
 invent new tasks. Polish has diminishing returns.
@@ -210,6 +214,8 @@ Stop and escalate when ANY of these trigger:
   game logic, tests, or out-of-scope files
 - **Unknown errors:** Any error message you cannot 
   diagnose after 1 attempt
+- **Queue overflow:** HUMAN_QUEUE.md exceeds 10 items 
+  (per Section 15)
 
 Halt = commit current state, write a final report, stop.
 
@@ -240,6 +246,9 @@ as a markdown file at `POLISH_REPORT.md`:
 - Regressions: 
 
 ## Files Modified
+
+
+## Decisions Needed (from HUMAN_QUEUE.md)
 
 
 ## Recommendations for Human Review
@@ -280,6 +289,8 @@ as a markdown file at `POLISH_REPORT.md`:
 - Hardcoding values that should be theme constants
 - Copy-pasting animation code instead of extracting 
   reusable methods after the 2nd duplication
+- Blocking on human input when the queue mechanism 
+  (Section 15) is the correct path
 
 ---
 
@@ -324,3 +335,103 @@ on wake-up.
 If a tween parameter feels arbitrary, pick a reasonable 
 value and move on. Do not iterate on aesthetics — 
 iterate on whether things work.
+
+---
+
+## 15. Human-Input Queue (Deferred, Non-Blocking)
+
+When a task requires human judgment or input you cannot 
+perform autonomously, DO NOT halt the run. The human is 
+asleep. Instead:
+
+### Queue Mechanism
+
+1. **Append** the item to `HUMAN_QUEUE.md` at the 
+   project root. Create the file if it doesn't exist 
+   with this header:
+Human Input Queue
+Items deferred for human review. Each item is a
+decision or action the agent could not make
+autonomously.
+
+2. **Format** each entry as:
+```markdown
+   ## Item [N]: [Short title]
+   - **Tier/Task:** [e.g., Tier 2, Task 6]
+   - **Context:** [What was being attempted]
+   - **What I tried:** [What you attempted before deferring]
+   - **Why human input is needed:** [Specific reason]
+   - **Question/Action requested:** [Clear ask]
+   - **Suggested options (if applicable):** 
+     - Option A: [description]
+     - Option B: [description]
+   - **My recommendation (if any):** [Your default pick 
+     if you had to choose, with reasoning]
+   - **Status:** Deferred — task skipped, continuing 
+     with next priority item
+   - **Timestamp:** [UTC time]
+```
+
+3. **Continue** with the next task in priority order. 
+   Do not block waiting for human response.
+
+### What Belongs in the Queue
+
+Defer items like:
+- Pure aesthetic choices ("which of 3 color palettes")
+- Ambiguous requirements where the contract isn't specific
+- Missing assets that need human upload (e.g., font files)
+- Subjective tuning ("does this animation feel too fast")
+- Trade-offs between equally valid approaches
+
+### What Does NOT Belong in the Queue
+
+These still halt per Section 8:
+- Scope-out-of-bounds requests
+- Test failures or cascading bugs
+- Unknown errors you cannot diagnose
+- Iteration/failure caps reached
+
+### Queue Limit
+
+If HUMAN_QUEUE.md grows past **10 items**, this is a 
+signal that the contract is not specific enough or the 
+work has become too subjective. Halt the run per 
+Section 8.
+
+### Default Behavior When Deferring
+
+When you defer a subjective choice and continue, do NOT 
+skip the polish task entirely if it can proceed with a 
+reasonable default. Instead:
+
+- If the choice is "which of X options" → pick the 
+  recommendation in your queue entry, proceed, document 
+  in the entry that you made a provisional choice
+- If the choice is "is this acceptable" → assume yes, 
+  proceed, document in the queue
+- If the choice blocks progress entirely (e.g., missing 
+  font file) → skip the task, document, continue to 
+  next priority
+
+The human's review of HUMAN_QUEUE.md in the morning is 
+the *correction* pass, not the *unblock* pass. The run 
+keeps moving.
+
+### Final Report Integration
+
+In POLISH_REPORT.md, include a "Decisions Needed" 
+section that summarizes HUMAN_QUEUE.md contents and 
+flags which provisional choices were made so the human 
+can review and override if needed.
+
+# Future Features (Not for Polish Pass)
+
+## Leaderboard
+- Display top wins by lowest move count
+- Persistent local storage
+- Player initials entry on win
+- Will be scoped in its own contract: card_leaderboard_contract.md
+
+## Other ideas
+(add as they come up)
