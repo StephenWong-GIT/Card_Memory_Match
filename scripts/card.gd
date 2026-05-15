@@ -11,6 +11,7 @@ signal state_changed(new_state: State)
 
 @onready var _face: ColorRect = $Face
 
+var pair_id: int = -1
 var _state: State = State.FACE_DOWN
 
 const COLOR_FACE_DOWN := Color(0.15, 0.18, 0.35)
