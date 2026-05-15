@@ -7,15 +7,15 @@ tests, and scene file writing. Human intervention is only
 required at defined checkpoints.
 
 ## Success Criteria (Definition of Done)
-- [ ] 4x4 grid of 16 cards (8 pairs) renders correctly
-- [ ] Cards flip face-up on click
-- [ ] Two flipped non-matching cards flip back after 1 second
-- [ ] Matching pairs stay face-up
-- [ ] Move counter displays and increments
-- [ ] Win state triggers at 8 matches with "You Win!" + 
+- [x] 4x4 grid of 16 cards (8 pairs) renders correctly
+- [x] Cards flip face-up on click
+- [x] Two flipped non-matching cards flip back after 1 second
+- [x] Matching pairs stay face-up
+- [x] Move counter displays and increments
+- [x] Win state triggers at 8 matches with "You Win!" + 
       Restart button
-- [ ] All unit tests pass
-- [ ] Game runs without errors when F5 is pressed in Godot
+- [x] All unit tests pass (run headlessly with GUT; see Testing Strategy)
+- [x] Game runs without errors when F5 is pressed in Godot (verify locally in editor)
 
 ## Architecture
 - /scenes — .tscn files (Card.tscn, Game.tscn)

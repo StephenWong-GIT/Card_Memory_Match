@@ -101,14 +101,14 @@ func test_non_matching_pair_returns_face_down():
 
 	var pair := _find_non_matching_pair(game)
 	if pair.is_empty():
-		pass  # Rare on a tiny board, skip gracefully.
 		return
-	# Simulate a click on each; game will flip both up then back after 1s.
 	pair[0].card_clicked.emit()
 	pair[1].card_clicked.emit()
-	# After 1s the game timer will flip them back — just verify they went face-up first.
 	assert_eq(pair[0].get_state(), pair[0].State.FACE_UP)
 	assert_eq(pair[1].get_state(), pair[1].State.FACE_UP)
+	await get_tree().create_timer(1.15).timeout
+	assert_eq(pair[0].get_state(), pair[0].State.FACE_DOWN)
+	assert_eq(pair[1].get_state(), pair[1].State.FACE_DOWN)
 
 
 # ---------------------------------------------------------------------------
