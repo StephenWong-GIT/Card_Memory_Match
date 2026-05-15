@@ -70,12 +70,16 @@ func _on_card_clicked(card: Control) -> void:
 	if a.pair_id == b.pair_id:
 		a.mark_matched()
 		b.mark_matched()
+		a.play_match_celebration()
+		b.play_match_celebration()
 		_matches += 1
 		_flipped.clear()
 		_locked = false
 		if _matches == PAIR_COUNT:
 			_win_panel.visible = true
 	else:
+		a.play_mismatch_feedback()
+		b.play_mismatch_feedback()
 		await get_tree().create_timer(1.0).timeout
 		# Cards may have been freed by a restart; guard before flipping back.
 		if is_instance_valid(a):
